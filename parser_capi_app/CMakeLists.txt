@@ -1,9 +1,9 @@
 # ____________________________________________________________________________
-# packet parser project top level CMake file
+# parser capi application project CMake file
 #
 # @file        CMakeLists.txt
 # @author      Recep Birol Gül <rgul@nettsi.com>
-# @date        30.01.2020
+# @date        24.02.2020
 # 
 # @copyright   2020 NETTSI Informatics Technology Inc.
 # 
@@ -11,11 +11,12 @@
 # Proprietary and confidential
 # ____________________________________________________________________________
 
-cmake_minimum_required(VERSION 3.0)
+project(packet_parser.capi.app)
 
-project(packet_parser)
+add_executable(${PROJECT_NAME} main.c)
 
-add_subdirectory(pcap_utility)
-add_subdirectory(parser)
-add_subdirectory(parser_application)
-add_subdirectory(parser_capi_app)
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
+target_link_libraries(${PROJECT_NAME} pcap packet_parser.pcap_utility packet_parser.lib)
+
+
+

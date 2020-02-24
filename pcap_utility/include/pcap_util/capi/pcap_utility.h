@@ -15,13 +15,12 @@
 
 #pragma once
 
-#include <pcap_util/pcap_fwd.hpp>
 
 #ifdef __cplusplus
     extern "C" {
 #endif // __cplusplus
 
-
+struct pcap_pkthdr;
 typedef unsigned char u_char;
 typedef struct pcap_interface pcap_interface;
 

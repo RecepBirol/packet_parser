@@ -97,6 +97,7 @@ int main(int argc, char* argv[]) {
         pcap->list_all_devs();
         pcap->start(packet_handler);
     }
+    
 
     return 0;
 }
