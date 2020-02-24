@@ -44,7 +44,7 @@ namespace packet_parser{
 
     void parser::process_packet(std::uint8_t* packet,
         std::uint32_t pkt_len, std::int32_t data_link)
-    { 
+    {
         parser::total_pkt_count++;
         
         parsed_data parsed_data {};
