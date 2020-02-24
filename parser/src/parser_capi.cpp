@@ -32,9 +32,9 @@ extern "C" {
 
     void packet_parser_process_packet(
         parser* p, 
-        std::uint8_t* packet,
-        std::uint32_t pkt_len,
-        std::int32_t data_link)
+        uint8_t* packet,
+        uint32_t pkt_len,
+        int32_t data_link)
     {
         packet_parser::parser* parser =
             reinterpret_cast<packet_parser::parser*>(p);

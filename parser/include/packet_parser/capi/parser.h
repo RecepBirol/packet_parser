@@ -21,9 +21,17 @@
     extern "C" {
 #endif // __cplusplus
 
+#include <stdint.h>
+
 typedef struct parser parser;
 
 parser* packet_parser_new_parser(void);
+void packet_parser_delete_parser(parser* p);
+void packet_parser_process_packet(
+    parser* p, 
+    uint8_t* packet,
+    uint32_t pkt_len,
+    int32_t data_link);
 
 
 #ifdef __cplusplus

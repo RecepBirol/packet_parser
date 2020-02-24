@@ -14,6 +14,7 @@
  */
 
 #include <pcap_util/capi/pcap_utility.h>
+#include <packet_parser/capi/parser.h>
 
 #include <pcap.h>
 #include <stdlib.h>
@@ -22,6 +23,8 @@
 #include <stdio.h>
 #include <string.h>
 
+static parser* packet_parser;
+
 /**
  * @brief Delegete incoming packet to packet parser.
  * 
@@ -29,20 +32,21 @@
  * @param header pcap packet header of captured packet
  * @param packet packet payload
  */
-/*
 static void packet_handler(u_char* args,
     const struct pcap_pkthdr* header,
     const u_char* packet)
 {
-    
-    std::int32_t data_link = pcap_datalink(reinterpret_cast<pcap_t*>(args));
-    static packet_parser::parser packet_parser {};
+    pcap_t* pcap_desc = (pcap_t*)(args);
+    int32_t data_link = pcap_datalink(pcap_desc);
 
-    // TODO(rgul): packet fregmentation should be handled, if needed
 
-    packet_parser.process_packet(const_cast<std::uint8_t*>(packet),
-        static_cast<std::uint32_t>(header->caplen), data_link);
-} */
+    packet_parser = packet_parser_new_parser();    
+
+    packet_parser_process_packet(packet_parser, 
+        (uint8_t*)(packet),
+        (uint32_t)(header->caplen),
+        data_link);
+} 
 
 /**
  * @brief Main entry point of the application
@@ -58,15 +62,19 @@ int main(int argc, char* argv[]) {
         pcap = pcap_util_new_online_capture(optarg);
     } else if (opt == 'f') {
         printf("file path: %s", optarg);
-
+        pcap = pcap_util_new_offline_capture(optarg);
     } else {
-
         printf("application start default settings");
+        pcap_if_t* all_devs;
+        char err_buff[PCAP_ERRBUF_SIZE];
+        pcap_findalldevs(&all_devs, err_buff);
+        pcap = pcap_util_new_online_capture(all_devs->name);
     }
     
     pcap_util_list_all_devs(pcap);
-    pcap_util_start_capture_with_default_handler(pcap);
+    pcap_util_start_capture(pcap, packet_handler);
 
-    
+
+
     return 0;
 }
