@@ -25,8 +25,25 @@
 
 typedef struct parser parser;
 
+/**
+ * @brief Construct a new parser object
+ * @return parser* pointer to the newly constructed parser object
+*/
 parser* packet_parser_new_parser(void);
+
+/**
+ * @brief Delete a parser object
+ * @param p pointer to the parser object
+*/
 void packet_parser_delete_parser(parser* p);
+
+/**
+ * @brief parse given packet
+ * @param p pointer to the parser object
+ * @param packet pointer to the captured packet to be parsed
+ * @param pkt_len lenght of the packet
+ * @param data_link data link of the packet to determine l2 header type
+*/
 void packet_parser_process_packet(
     parser* p, 
     uint8_t* packet,

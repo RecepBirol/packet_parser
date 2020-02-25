@@ -22,9 +22,6 @@
 #include <pcap.h>
 
 extern "C" {
-    /*
-     *
-     */
     pcap_interface* pcap_util_new_online_capture(char* interface_name) {
         pcap_util::pcap_online* new_pcap =
             new pcap_util::pcap_online(interface_name);
