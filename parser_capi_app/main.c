@@ -36,11 +36,11 @@ static void packet_handler(u_char* args,
     const struct pcap_pkthdr* header,
     const u_char* packet)
 {
-    pcap_t* pcap_desc = (pcap_t*)(args);
-    int32_t data_link = pcap_datalink(pcap_desc);
+    
+    int32_t data_link = pcap_util_get_datalink((pcap_interface*)(args));
 
 
-    packet_parser = packet_parser_new_parser();    
+    packet_parser = packet_parser_new_parser();
 
     packet_parser_process_packet(packet_parser, 
         (uint8_t*)(packet),

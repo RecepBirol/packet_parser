@@ -25,6 +25,8 @@
 
 typedef struct parser parser;
 
+
+
 /**
  * @brief Construct a new parser object
  * @return parser* pointer to the newly constructed parser object

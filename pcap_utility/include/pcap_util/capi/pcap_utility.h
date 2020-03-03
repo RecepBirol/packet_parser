@@ -15,10 +15,11 @@
 
 #pragma once
 
-
 #ifdef __cplusplus
     extern "C" {
 #endif // __cplusplus
+
+
 
 struct pcap_pkthdr;
 typedef unsigned char u_char;
@@ -45,7 +46,7 @@ pcap_interface* pcap_util_new_offline_capture(char* file_path);
  * @param pc pointer to the pcap_interface object to be deleted
  * 
 */
-void pcap_util_delete_online_capture(pcap_interface* pc);
+void pcap_util_delete_capture(pcap_interface* pc);
 
 /**
  * @brief list all available interface devices
@@ -69,6 +70,8 @@ void pcap_util_start_capture(pcap_interface* pc,
 */
 void pcap_util_start_capture_with_default_handler(pcap_interface* pc);
 
+
+int pcap_util_get_datalink(pcap_interface* pc);
 
 #ifdef __cplusplus
     }

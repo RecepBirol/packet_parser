@@ -19,28 +19,25 @@
 #include <packet_parser/parser.hpp>
 
 
-extern "C" {
-    parser* packet_parser_new_parser(void) {
-        packet_parser::parser* new_parser = new packet_parser::parser();
-        return reinterpret_cast<parser*>(new_parser);
-    }
+
+parser* packet_parser_new_parser(void) {
+    packet_parser::parser* new_parser = new packet_parser::parser();
+    return reinterpret_cast<parser*>(new_parser);
+}
 
 
-    void packet_parser_delete_parser(parser* p) {
-        delete reinterpret_cast<packet_parser::parser*>(p);
-    }
+void packet_parser_delete_parser(parser* p) {
+    delete reinterpret_cast<packet_parser::parser*>(p);
+}
 
-    void packet_parser_process_packet(
-        parser* p, 
-        uint8_t* packet,
-        uint32_t pkt_len,
-        int32_t data_link)
-    {
-        packet_parser::parser* parser =
-            reinterpret_cast<packet_parser::parser*>(p);
-        
-        parser->process_packet(packet, pkt_len, data_link);
-    }
-
-
-} // extern "C"
+void packet_parser_process_packet(
+    parser* p, 
+    uint8_t* packet,
+    uint32_t pkt_len,
+    int32_t data_link)
+{
+    packet_parser::parser* parser =
+        reinterpret_cast<packet_parser::parser*>(p);
+    
+    parser->process_packet(packet, pkt_len, data_link);
+}

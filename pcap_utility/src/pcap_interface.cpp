@@ -58,8 +58,8 @@ namespace pcap_util{
     }
 
     void pcap_interface::start(callback_fn callback) {
-        if (pcap_loop(pcap_handle.get(), 0, callback,
-            reinterpret_cast<u_char*>(pcap_handle.get())) < 0) 
+        if (pcap_loop(pcap_handle.get(), 0, callback, 
+        reinterpret_cast<u_char*>(this)) < 0)
         {
             throw std::runtime_error(pcap_geterr(pcap_handle.get()));
         }
@@ -74,7 +74,12 @@ namespace pcap_util{
         if (0 != pcap_findalldevs(&_all_devs, err_buff)) {
             throw std::runtime_error(err_buff);
         }
+
         all_if_devs = pcap_if_ptr(_all_devs, pcap_freealldevs);
+    }
+
+    std::int32_t pcap_interface::get_datalink(void) {
+        return pcap_datalink(pcap_handle.get());
     }
 
     pcap_interface::~pcap_interface() = default;

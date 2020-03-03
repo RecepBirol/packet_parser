@@ -13,6 +13,8 @@
 
 cmake_minimum_required(VERSION 3.0)
 
+set(CMAKE_CXX_FLAGS "-fPIC ${CMAKE_CXX_FLAGS}")
+
 project(packet_parser)
 
 add_subdirectory(pcap_utility)

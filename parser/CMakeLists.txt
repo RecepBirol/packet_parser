@@ -13,6 +13,9 @@
 
 project(packet_parser.lib)
 
+
+
 aux_source_directory(${PROJECT_SOURCE_DIR}/src PARSER_SRCS)
-add_library(${PROJECT_NAME} SHARED ${PARSER_SRCS})
+
+add_library(${PROJECT_NAME} ${PARSER_SRCS})
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)

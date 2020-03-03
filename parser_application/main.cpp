@@ -41,8 +41,9 @@ static void packet_handler(u_char* args,
     const struct pcap_pkthdr* header,
     const u_char* packet)
 {
+    std::int8_t data_link = 
+        reinterpret_cast<pcap_util::pcap_interface*>(args)->get_datalink();
     
-    std::int32_t data_link = pcap_datalink(reinterpret_cast<pcap_t*>(args));
     static packet_parser::parser packet_parser {};
 
     // TODO(rgul): packet fregmentation should be handled, if needed
@@ -97,7 +98,7 @@ int main(int argc, char* argv[]) {
         pcap->list_all_devs();
         pcap->start(packet_handler);
     }
-    
+ 
 
     return 0;
 }

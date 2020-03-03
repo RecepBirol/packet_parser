@@ -76,6 +76,8 @@ namespace pcap_util {
          */
         void list_all_devs(void) const;
         
+        std::int32_t get_datalink(void);
+
         /**
          * @brief Open the interface represented by the parameter.
          * 
