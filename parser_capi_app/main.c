@@ -23,8 +23,6 @@
 #include <stdio.h>
 #include <string.h>
 
-//static parser* packet_parser;
-
 /**
  * @brief Delegete incoming packet to packet parser.
  * 

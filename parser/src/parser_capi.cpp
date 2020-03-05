@@ -17,7 +17,6 @@
 
 #include <packet_parser/capi/parser.h>
 #include <packet_parser/parser.hpp>
-#include <packet_parser/parsed_data.hpp>
 
 
 parser* packet_parser_new_parser(void) {

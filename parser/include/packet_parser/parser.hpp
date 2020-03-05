@@ -20,8 +20,6 @@
 #include <cstdint>
 #include <memory>
 
-#include <packet_parser/parsed_data.hpp>
-
 namespace packet_parser {
 
     class l2_parser;
