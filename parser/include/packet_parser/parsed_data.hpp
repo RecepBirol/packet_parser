@@ -68,7 +68,7 @@ namespace packet_parser {
         std::uint16_t       type_id;
         std::uint32_t       length;
         std::uint32_t       sll_pkttype;
-
+        bool                result;
     }; // layer_2_data
 
     /**
@@ -84,6 +84,7 @@ namespace packet_parser {
         std::string         protocol;
         std::uint16_t       identification;
         std::uint32_t       length;
+        bool                result;
     }; // layer_3_data
 
     /**
@@ -96,6 +97,7 @@ namespace packet_parser {
         std::uint16_t       src_port;
         std::uint16_t       dst_port;
         std::uint32_t       length;
+        bool                result;
     }; // layer_4_data
 
     /**
@@ -106,7 +108,6 @@ namespace packet_parser {
         layer_2_data layer_2;
         layer_3_data layer_3;
         layer_4_data layer_4;
-
     }; // parsed_data
 
 }; // namespace packet_parser

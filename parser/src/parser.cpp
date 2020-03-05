@@ -65,9 +65,14 @@ namespace packet_parser{
             parsed_data.layer_2.header_type = l2_header_type_t::unsupported;
         }
 
+        parsed_data.layer_2.result = 
+            layer_2->parse_packet(packet, parsed_data.layer_2, pkt_len);
 
-        if (!layer_2->parse_packet(packet, parsed_data.layer_2, pkt_len)) {
+
+        if (!parsed_data.layer_2.result) {
             std::cout << "Layer 2 parse failed" << std::endl;
+            parsed_data.layer_3.result = false;
+            parsed_data.layer_4.result = false;
             return;
         }
 
@@ -76,8 +81,12 @@ namespace packet_parser{
         const std::uint8_t* l2_payload = (packet + parsed_data.layer_2.length);
         const std::uint32_t l2_pl_len = pkt_len - parsed_data.layer_2.length;
 
-        if (!layer_3->parse_packet(l2_payload, parsed_data.layer_3, l2_pl_len)) {
+        parsed_data.layer_3.result = 
+            layer_3->parse_packet(l2_payload, parsed_data.layer_3, l2_pl_len);
+
+        if (!parsed_data.layer_3.result) {
             std::cout << "Layer 3 parse failed" << std::endl;
+            parsed_data.layer_4.result = false;
             return;
         }
 
@@ -94,7 +103,9 @@ namespace packet_parser{
             parsed_data.layer_4.header_type = l4_header_type_t::unsupported;
         }
 
-        if (!layer_4->parse_packet(l3_payload, parsed_data.layer_4, l3_pl_len)) {
+        parsed_data.layer_4.result = 
+            layer_4->parse_packet(l3_payload, parsed_data.layer_4, l3_pl_len);
+        if (!parsed_data.layer_4.result) {
             std::cout << "Layer 4 parse failed" << std::endl;
             return;
         }
@@ -112,6 +123,7 @@ namespace packet_parser{
 
         std::cout << std::string(80, '=') << std::endl;
 
+        return;
     }
 
 }

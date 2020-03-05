@@ -23,7 +23,7 @@
 #include <stdio.h>
 #include <string.h>
 
-static parser* packet_parser;
+//static parser* packet_parser;
 
 /**
  * @brief Delegete incoming packet to packet parser.
@@ -40,12 +40,14 @@ static void packet_handler(u_char* args,
     int32_t data_link = pcap_util_get_datalink((pcap_interface*)(args));
 
 
-    packet_parser = packet_parser_new_parser();
+    parser* packet_parser = packet_parser_new_parser();
 
     packet_parser_process_packet(packet_parser, 
         (uint8_t*)(packet),
         (uint32_t)(header->caplen),
         data_link);
+
+    packet_parser_delete_parser(packet_parser);
 } 
 
 /**

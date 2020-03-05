@@ -17,7 +17,7 @@
 
 #include <packet_parser/capi/parser.h>
 #include <packet_parser/parser.hpp>
-
+#include <packet_parser/parsed_data.hpp>
 
 
 parser* packet_parser_new_parser(void) {
@@ -39,5 +39,5 @@ void packet_parser_process_packet(
     packet_parser::parser* parser =
         reinterpret_cast<packet_parser::parser*>(p);
     
-    parser->process_packet(packet, pkt_len, data_link);
+    return parser->process_packet(packet, pkt_len, data_link);
 }
